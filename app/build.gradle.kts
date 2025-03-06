@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.marsphotos"
+    namespace = "com.tuapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.marsphotos"
+        applicationId = "com.tuapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -72,9 +72,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
     // Room para base de datos SQLite
-    implementation("androidx.room:room-runtime:2.6.1") // Última versión estable
+    implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1") // Actualiza la versión
+    kapt("androidx.room:room-compiler:2.6.1")
 
     // WorkManager para sincronización en segundo plano
     implementation("androidx.work:work-runtime-ktx:2.8.0")
@@ -96,4 +96,9 @@ dependencies {
     // Retrofit y Gson
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // Jetpack DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-core:1.0.0")
+
 }

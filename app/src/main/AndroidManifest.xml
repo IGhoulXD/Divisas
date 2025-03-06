@@ -1,47 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.tuapp">
 
     <!-- Permisos necesarios -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/Theme.MarsPhotos"
-        tools:targetApi="33">
+        android:usesCleartextTraffic="true">
 
-        <!-- Actividad principal -->
-        <activity
-            android:name="com.example.marsphotos.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MarsPhotos">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+        <activity android:name="com.example.broadcastreceiver.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-    <!-- ContentProvider para acceder a la base de datos -->
-    <provider
-        android:name=".provider.ExchangeRateProvider"
-        android:authorities="com.example.marsphotos.provider"
-        android:exported="false"
-        android:grantUriPermissions="true" />
+        <!-- BroadcastReceiver para llamadas entrantes -->
+        <receiver android:name="com.example.broadcastreceiver.ui.callReciver.CallReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
 
-    <!-- Servicio para WorkManager -->
-    <service
-        android:name="androidx.work.impl.background.systemjob.SystemJobService"
-        android:permission="android.permission.BIND_JOB_SERVICE"
-        android:exported="true" />
-
-</application>
-
-    </manifest>
+    </application>
+</manifest>
